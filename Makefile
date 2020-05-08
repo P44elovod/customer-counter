@@ -1,3 +1,3 @@
+.SILENT:
 run:
-	go run ./src/main.go
-
+	go run *.go
