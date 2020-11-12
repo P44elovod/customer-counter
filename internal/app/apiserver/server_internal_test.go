@@ -1,6 +1,7 @@
 package apiserver
 
 import (
+	"customer-counter/util"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -47,8 +48,8 @@ func TestServer_HandleCounter(t *testing.T) {
 			want: []byte("3"),
 		},
 	}
-
-	handler := http.HandlerFunc(handleCounter)
+	s := New(util.NewConfig())
+	handler := s.handleCounter()
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
