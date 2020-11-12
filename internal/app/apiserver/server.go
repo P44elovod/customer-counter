@@ -1,9 +1,11 @@
-package server
+package apiserver
 
 import (
 	"customer-counter/util"
-	"io"
+	"fmt"
 	"net/http"
+	"strconv"
+	"sync"
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
@@ -46,11 +48,18 @@ func (s *Server) configureLogger() error {
 }
 
 func (s *Server) configureRouter() {
-	s.router.HandleFunc("/hello", s.handleHello())
+	s.router.HandleFunc("/", s.handleCounter())
 }
 
-func (s *Server) handleHello() http.HandlerFunc {
+func (s *Server) handleCounter() http.HandlerFunc {
+	var mutex = &sync.Mutex{}
+	var counter = 0
+
 	return func(w http.ResponseWriter, r *http.Request) {
-		io.WriteString(w, "hello")
+		mutex.Lock()
+
+		counter++
+		fmt.Fprintf(w, strconv.Itoa(counter))
+		mutex.Unlock()
 	}
 }

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"customer-counter/internal/app/server"
+	"customer-counter/internal/app/apiserver"
 	"customer-counter/util"
 	"flag"
 	"log"
@@ -24,7 +24,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	s := server.New(config)
+	s := apiserver.New(config)
 	if err := s.Start(); err != nil {
 		log.Fatal(err)
 	}
