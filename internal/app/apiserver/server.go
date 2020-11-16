@@ -49,6 +49,7 @@ func (s *Server) configureLogger() error {
 
 func (s *Server) configureRouter() {
 	s.router.HandleFunc("/", s.handleCounter())
+
 }
 
 func (s *Server) handleCounter() http.HandlerFunc {
@@ -60,6 +61,7 @@ func (s *Server) handleCounter() http.HandlerFunc {
 
 		counter++
 		fmt.Fprintf(w, strconv.Itoa(counter))
+		s.logger.Info(counter)
 		mutex.Unlock()
 	}
 }
