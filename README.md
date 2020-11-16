@@ -1,6 +1,5 @@
 # customer-counter
 
-for start use: 
-make run or go run *.go
+pls use makefile for build or run application 
 
 rout with counter: localhost:8080
