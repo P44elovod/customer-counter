@@ -9,25 +9,17 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// func TestServer_New(t *testing.T) {
-// 	s := New(util.NewConfig())
-// 	rec := httptest.NewRecorder()
-// 	req, _ := http.NewRequest(http.MethodGet, "/", nil)
+func TestServer_ServerRespond(t *testing.T) {
+	s := New(util.NewConfig())
+	rec := httptest.NewRecorder()
+	req, _ := http.NewRequest(http.MethodGet, "/", nil)
 
-// 	s.handleCounter().ServeHTTP(rec, req)
+	handler := s.handleCounter()
 
-// 	assert.Equal(t, rec.Code, 200)
-// }
+	handler.ServeHTTP(rec, req)
 
-// func TestServer_HandleCounter(t *testing.T) {
-// 	s := New(util.NewConfig())
-// 	rec := httptest.NewRecorder()
-// 	req, _ := http.NewRequest(http.MethodGet, "/", nil)
-
-// 	s.handleCounter().ServeHTTP(rec, req)
-
-// 	assert.Equal(t, rec.Body)
-// }
+	assert.Equal(t, rec.Code, 200)
+}
 
 func TestServer_HandleCounter(t *testing.T) {
 	testCases := []struct {
